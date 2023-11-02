@@ -1,17 +1,29 @@
 import streamlit as st
 import os
 from ctransformers import AutoModelForCausalLM
+import logging
+
+# Set logging level info
+logging.basicConfig(level=logging.INFO)
+# init logger
+logger = logging.getLogger(__name__)
+logger.info("Starting up..")
 
 # App title
 st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
 
 @st.cache_resource()
 def ChatModel(temperature, top_p):
-    return AutoModelForCausalLM.from_pretrained(
-        'ggml-llama-2-7b-chat-q4_0.bin', 
+# Load model from local file 
+    model = AutoModelForCausalLM.from_pretrained(
+        './llama-2-7b-chat.ggmlv3.q2_K.bin',
         model_type='llama',
         temperature=temperature, 
-        top_p = top_p)
+        top_p = top_p,
+        gpu_layers=50
+        )
+    
+    return model
 
 # Replicate Credentials
 with st.sidebar:
@@ -23,7 +35,7 @@ with st.sidebar:
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=2.0, value=0.1, step=0.01)
     top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
     # max_length = st.sidebar.slider('max_length', min_value=64, max_value=4096, value=512, step=8)
-    chat_model =ChatModel(temperature, top_p)
+    chat_model = ChatModel(temperature, top_p)
     # st.markdown('📖 Learn how to build this app in this [blog](#link-to-blog)!')
 
 # Store LLM generated responses

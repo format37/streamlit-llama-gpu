@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   streamlit_app:
     build:
@@ -6,8 +6,14 @@ services:
     container_name: streamlit_llama
     ports:
       - "8501:8501"
-
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
     deploy:
       resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
         limits:
           memory: 4G
