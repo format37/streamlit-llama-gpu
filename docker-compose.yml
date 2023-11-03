@@ -6,6 +6,8 @@ services:
     container_name: streamlit_llama
     ports:
       - "8501:8501"
+    volumes:
+      - ./models:/app/models
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     deploy:

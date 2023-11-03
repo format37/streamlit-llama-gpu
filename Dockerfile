@@ -16,7 +16,7 @@ FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-devel
 
 WORKDIR /app
 
-COPY llama-2-7b-chat.ggmlv3.q2_K.bin llama-2-7b-chat.ggmlv3.q2_K.bin
+# COPY llama-2-7b-chat.ggmlv3.q2_K.bin llama-2-7b-chat.ggmlv3.q2_K.bin
 
 COPY requirements.txt requirements.txt
 

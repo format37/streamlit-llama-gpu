@@ -16,7 +16,7 @@ st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
 def ChatModel(temperature, top_p):
 # Load model from local file 
     model = AutoModelForCausalLM.from_pretrained(
-        './llama-2-7b-chat.ggmlv3.q2_K.bin',
+        './models/luna-ai-llama2-uncensored.ggmlv3.q8_0.bin',
         model_type='llama',
         temperature=temperature, 
         top_p = top_p,

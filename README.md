@@ -1,3 +1,13 @@
+# Quick instruiction
+Requirements:
+* Nvidia GPU
+* [Docker](https://gist.github.com/format37/2d7bd6ffd92243d8578c284fc6b77e02)
+```
+git clone https://github.com/format37/streamlit-llama-gpu.git
+cd streamlit-llama-gpu
+sh download.sh
+sh compose.sh
+```
 # Streamlit Chatbot with Memory using Llama-2-7B-Chat (Quantized GGML)
 
 Working Url: https://chatdemo.talhaanwar.com/ 
