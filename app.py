@@ -13,14 +13,16 @@ logger.info("Starting up..")
 st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
 
 @st.cache_resource()
-def ChatModel(temperature, top_p):
+def ChatModel(temperature, top_p, max_new_tokens, context_length):
 # Load model from local file 
     model = AutoModelForCausalLM.from_pretrained(
         './models/luna-ai-llama2-uncensored.ggmlv3.q8_0.bin',
         model_type='llama',
         temperature=temperature, 
         top_p = top_p,
-        gpu_layers=50
+        gpu_layers=50,
+        max_new_tokens=max_new_tokens,
+        context_length=context_length,
         )
     
     return model
@@ -34,8 +36,11 @@ with st.sidebar:
     
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=2.0, value=0.1, step=0.01)
     top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
-    # max_length = st.sidebar.slider('max_length', min_value=64, max_value=4096, value=512, step=8)
-    chat_model = ChatModel(temperature, top_p)
+    # context_length = st.sidebar.slider('context_length', min_value=64, max_value=4096, value=4096, step=8)
+    # max_new_tokens = st.sidebar.slider('max_new_tokens', min_value=64, max_value=4096, value=1024, step=8)
+    context_length = 4096
+    max_new_tokens = 4096
+    chat_model = ChatModel(temperature, top_p, max_new_tokens, context_length)
     # st.markdown('📖 Learn how to build this app in this [blog](#link-to-blog)!')
 
 # Store LLM generated responses
