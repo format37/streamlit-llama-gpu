@@ -24,8 +24,11 @@ RUN pip3 install -r requirements.txt
 # RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 COPY app.py app.py
+COPY server.py server.py
 
 EXPOSE 8501
 
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Fastapi server.py
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8501"]
 # ENTRYPOINT ["nvidia-smi"]

@@ -1,2 +1,4 @@
 ctransformers[cuda]==0.2.27
 streamlit
+fastapi==0.103.2
+uvicorn==0.23.2
